@@ -1,21 +1,24 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Hello World</Text>
-      </View>
-    );
-  }
-}
+import HomeScreen from "./screens/HomeScreen";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const Navigator = createSwitchNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: { title: "Home" },
+    },
   },
-});
+  {
+    initialRouteName: "Home",
+  },
+);
+
+const AppNavigationContainer = createAppContainer(Navigator);
+
+const App = () => (
+  <AppNavigationContainer />
+);
+
+export default App;
