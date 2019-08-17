@@ -1,14 +1,13 @@
 import React from "react";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
+import ArenaListScreen from "./screens/ArenaListScreen";
 import HomeScreen from "./screens/HomeScreen";
 
 const Navigator = createSwitchNavigator(
   {
-    Home: {
-      screen: HomeScreen,
-      navigationOptions: { title: "Home" },
-    },
+    ArenaList: { screen: ArenaListScreen },
+    Home: { screen: HomeScreen },
   },
   {
     initialRouteName: "Home",
