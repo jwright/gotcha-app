@@ -8,15 +8,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  message: {
-    color: "#ff0000",
-  },
 });
 
-const ErrorMessage = ({ error, message }) => (
+const ArenaCard = ({ arena: { locationName } }) => (
   <View style={styles.container}>
-    <Text style={styles.message}>{message}{` (${error})`}</Text>
+    <Text>Display {locationName} Now.</Text>
   </View>
 );
 
-export default ErrorMessage;
+export default ArenaCard;
