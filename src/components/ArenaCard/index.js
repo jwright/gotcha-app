@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+import ArenaContext from "../../context/ArenaContext";
+
 const styles = StyleSheet.create({
   button: {
     alignItems: "center",
@@ -25,14 +27,18 @@ const ArenaCard = ({ arena }) => {
           zipCode } = arena;
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={() => alert(`Store ${id}`)}>
-        <Text>{locationName}</Text>
-        <Text>{streetAddress1}</Text>
-        {streetAddress2 && <Text>{streetAddress2}</Text>}
-        <Text>{city}, {state} {zipCode}</Text>
-      </TouchableOpacity>
-    </View>
+    <ArenaContext.Consumer>
+      {({ arenaId, setArenaId }) => (
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.button} onPress={() => setArenaId(id)}>
+            <Text>{locationName}</Text>
+            <Text>{streetAddress1}</Text>
+            {streetAddress2 && <Text>{streetAddress2}</Text>}
+            <Text>{city}, {state} {zipCode}</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    </ArenaContext.Consumer>
   );
 };
 
