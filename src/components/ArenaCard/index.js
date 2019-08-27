@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ArenaCard = ({ arena }) => {
+const ArenaCard = ({ arena, navigation }) => {
   const { id,
           locationName,
           streetAddress1,
@@ -30,7 +30,10 @@ const ArenaCard = ({ arena }) => {
     <ArenaContext.Consumer>
       {({ arenaId, setArenaId }) => (
         <View style={styles.container}>
-          <TouchableOpacity style={styles.button} onPress={() => setArenaId(id)}>
+          <TouchableOpacity style={styles.button} onPress={() => {
+              setArenaId(id);
+              navigation.navigate("Match");
+            }}>
             <Text>{locationName}</Text>
             <Text>{streetAddress1}</Text>
             {streetAddress2 && <Text>{streetAddress2}</Text>}

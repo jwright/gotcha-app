@@ -21,7 +21,7 @@ const ArenaListScreen = ({ navigation }) => {
                       message="Error occured retrieving arenas. Try again later."
                     />;
 
-  return <Arenas arenas={data.arenas} />;
+  return <Arenas arenas={data.arenas} navigation={navigation} />;
 };
 
 ArenaListScreen.navigationOptions = {
