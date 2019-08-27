@@ -1,21 +1,43 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { ApolloProvider } from "@apollo/react-hooks";
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Hello World</Text>
-      </View>
-    );
-  }
-}
+import client from "./helpers/client";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+import ArenaContext from "./context/ArenaContext";
+
+import ArenaListScreen from "./screens/ArenaListScreen";
+import HomeScreen from "./screens/HomeScreen";
+import MatchScreen from "./screens/MatchScreen";
+
+const Navigator = createSwitchNavigator(
+  {
+    ArenaList: { screen: ArenaListScreen },
+    Home: { screen: HomeScreen },
+    Match: { screen: MatchScreen },
   },
-});
+  {
+    initialRouteName: "Home",
+  },
+);
+
+const AppNavigationContainer = createAppContainer(Navigator);
+
+const App = () => {
+  const [state, setState] = useState({
+    arenaId: null,
+    setArenaId: (arenaId) => {
+      setState({ arenaId });
+    },
+  });
+
+  return (
+    <ApolloProvider client={client}>
+      <ArenaContext.Provider value={state}>
+        <AppNavigationContainer />
+      </ArenaContext.Provider>
+    </ApolloProvider>
+  );
+};
+
+export default App;
