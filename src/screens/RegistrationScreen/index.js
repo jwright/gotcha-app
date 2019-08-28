@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const RegistrationScreen = () => {
+const RegistrationScreen = ({ navigation }) => {
   const [registerPlayer, { data }] = useMutation(RegisterPlayerMutation);
 
   return (
@@ -28,6 +28,7 @@ const RegistrationScreen = () => {
       <Text style={styles.header}>Player Registration</Text>
       <RegistrationForm onRegister={(registration) => {
         registerPlayer({ variables: registration });
+        navigation.navigate("Match");
       }} />
     </View>
   );
