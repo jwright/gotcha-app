@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useMutation } from "@apollo/react-hooks";
 
+import PlayerContext from "../../context/PlayerContext";
 import RegisterPlayerMutation from "../../mutations/RegisterPlayer";
 
 import RegistrationForm from "../../components/RegistrationForm";
@@ -21,15 +22,20 @@ const styles = StyleSheet.create({
 });
 
 const RegistrationScreen = ({ navigation }) => {
-  const [registerPlayer, { data }] = useMutation(RegisterPlayerMutation);
+  const { setPlayer } = useContext(PlayerContext);
+  const [registerPlayer] = useMutation(RegisterPlayerMutation, {
+    onCompleted({ registerPlayer: player }) {
+      setPlayer(player);
+      navigation.navigate("Match");
+    },
+  });
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Player Registration</Text>
-      <RegistrationForm onRegister={(registration) => {
-        registerPlayer({ variables: registration });
-        navigation.navigate("Match");
-      }} />
+      <RegistrationForm
+        onRegister={(registration) => registerPlayer({ variables: registration })}
+      />
     </View>
   );
 };
