@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { KeyboardAvoidingView, StyleSheet, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useMutation } from "@apollo/react-hooks";
 
+import LoginMutation from "../../mutations/Login";
 import PlayerContext from "../../context/PlayerContext";
-import RegisterPlayerMutation from "../../mutations/RegisterPlayer";
 
-import RegistrationForm from "../../components/RegistrationForm";
+import LoginForm from "../../components/LoginForm";
 
 const styles = StyleSheet.create({
   container: {
@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const RegistrationScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
   const { setPlayer } = useContext(PlayerContext);
-  const [registerPlayer] = useMutation(RegisterPlayerMutation, {
-    onCompleted({ registerPlayer: player }) {
+  const [login] = useMutation(LoginMutation, {
+    onCompleted({ login: player }) {
       setPlayer(player);
       navigation.navigate("Match");
     },
@@ -39,20 +39,18 @@ const RegistrationScreen = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
       <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={20}>
-        <Text style={styles.header}>Player Registration</Text>
-        <RegistrationForm
-          onRegister={(registration) => registerPlayer({ variables: registration })}
-        />
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.linkButton}>Already have an account?</Text>
+        <Text style={styles.header}>Login</Text>
+        <LoginForm onLogin={(auth) => login({ variables: auth})} />
+        <TouchableOpacity onPress={() => navigation.navigate("Registration")}>
+          <Text style={styles.linkButton}>Don&apos;t have an account?</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     </ScrollView>
   );
 };
 
-RegistrationScreen.navigationOptions = {
-  title: "Register"
+LoginScreen.navigationOptions = {
+  title: "Login"
 };
 
-export default RegistrationScreen;
+export default LoginScreen;

@@ -9,6 +9,7 @@ import PlayerContext from "./context/PlayerContext";
 
 import ArenaListScreen from "./screens/ArenaListScreen";
 import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
 import MatchScreen from "./screens/MatchScreen";
 import RegistrationScreen from "./screens/RegistrationScreen";
 
@@ -16,6 +17,7 @@ const Navigator = createSwitchNavigator(
   {
     ArenaList: { screen: ArenaListScreen },
     Home: { screen: HomeScreen },
+    Login: { screen: LoginScreen },
     Match: { screen: MatchScreen },
     Registration: { screen: RegistrationScreen },
   },

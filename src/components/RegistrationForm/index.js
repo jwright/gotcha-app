@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Alert, Image, Linking, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
@@ -64,6 +64,7 @@ class RegistrationForm extends React.Component {
 
   render() {
     const { avatar } = this.state;
+    const { onRegister } = this.props;
 
     return (
       <React.Fragment>
@@ -106,7 +107,7 @@ class RegistrationForm extends React.Component {
           secureTextEntry={true}
           textContentType="newPassword"
         />
-        <TouchableOpacity style={styles.button} onPress={() => console.log(this.state)}>
+        <TouchableOpacity style={styles.button} onPress={() => onRegister(this.state)}>
           <Text>Register</Text>
         </TouchableOpacity>
       </React.Fragment>
