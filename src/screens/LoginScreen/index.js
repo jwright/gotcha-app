@@ -4,6 +4,8 @@ import { useMutation } from "@apollo/react-hooks";
 
 import PlayerContext from "../../context/PlayerContext";
 
+import LoginForm from "../../components/LoginForm";
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -29,6 +31,7 @@ const LoginScreen = ({ navigation }) => {
     <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
       <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={20}>
         <Text style={styles.header}>Login</Text>
+        <LoginForm onLogin={(auth) => console.log(auth)} />
         <TouchableOpacity onPress={() => navigation.navigate("Registration")}>
           <Text style={styles.linkButton}>Don&apos;t have an account?</Text>
         </TouchableOpacity>
