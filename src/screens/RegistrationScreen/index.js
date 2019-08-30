@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { KeyboardAvoidingView, StyleSheet, ScrollView, Text, View } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useMutation } from "@apollo/react-hooks";
 
 import PlayerContext from "../../context/PlayerContext";
@@ -19,6 +19,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 40,
   },
+  linkButton: {
+    color: "#007AFF",
+    fontSize: 14,
+    padding: 8,
+    textAlign: "center",
+  },
 });
 
 const RegistrationScreen = ({ navigation }) => {
@@ -37,6 +43,9 @@ const RegistrationScreen = ({ navigation }) => {
         <RegistrationForm
           onRegister={(registration) => registerPlayer({ variables: registration })}
         />
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <Text style={styles.linkButton}>Already have an account?</Text>
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     </ScrollView>
   );
