@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { KeyboardAvoidingView, StyleSheet, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useMutation } from "@apollo/react-hooks";
 
+import LoginMutation from "../../mutations/Login";
 import PlayerContext from "../../context/PlayerContext";
 
 import LoginForm from "../../components/LoginForm";
@@ -27,11 +28,18 @@ const styles = StyleSheet.create({
 });
 
 const LoginScreen = ({ navigation }) => {
+  const [login] = useMutation(LoginMutation, {
+    onCompleted({ login: player }) {
+      setPlayer(player);
+      navigation.navigate("Match");
+    },
+  });
+
   return (
     <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
       <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={20}>
         <Text style={styles.header}>Login</Text>
-        <LoginForm onLogin={(auth) => console.log(auth)} />
+        <LoginForm onLogin={(auth) => login({ variables: auth})} />
         <TouchableOpacity onPress={() => navigation.navigate("Registration")}>
           <Text style={styles.linkButton}>Don&apos;t have an account?</Text>
         </TouchableOpacity>
