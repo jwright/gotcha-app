@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
 });
 
 const LoginScreen = ({ navigation }) => {
+  const { setPlayer } = useContext(PlayerContext);
   const [login] = useMutation(LoginMutation, {
     onCompleted({ login: player }) {
       setPlayer(player);
