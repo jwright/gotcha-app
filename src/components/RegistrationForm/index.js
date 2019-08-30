@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, Image, Linking, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
 
 const styles = StyleSheet.create({
   avatar: {
@@ -30,58 +32,86 @@ const styles = StyleSheet.create({
   }
 });
 
-const RegistrationForm = ({ onRegister }) => {
-  const [state, setState] = useState({
-    avatar: "",
+class RegistrationForm extends React.Component {
+  state = {
+    avatar: "https://www.dropbox.com/s/0bhghw81hpw4tqi/avatar.png?raw=1",
     emailAddress: "",
     name: "",
     password: "",
-  });
+  };
 
-  return (
-    <React.Fragment>
-      <View style={styles.avatarContainer}>
-        <Image style={styles.avatar} />
-        <TouchableOpacity style={styles.button}>
-          <Text>Upload Avatar</Text>
+  pickImage = async () => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+    if (status === "granted") {
+      const camera = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        mediaTypes: "Images",
+        base64: true,
+      });
+
+      if (!camera.cancelled) {
+        const { base64 } = camera;
+        this.setState({ avatar: `data:image/png;base64, ${base64}` });
+      }
+    } else {
+      Alert.alert("No Access",
+                  "Your device does not have permissions to view Camera Roll.", [
+        { text: "OK", onPress: () => Linking.openURL("app-settings:") },
+      ]);
+    }
+  };
+
+  render() {
+    const { avatar } = this.state;
+
+    return (
+      <React.Fragment>
+        <View style={styles.avatarContainer}>
+          <Image style={styles.avatar} resizeMode="cover" source={{ uri: avatar }} />
+          <TouchableOpacity
+             style={styles.button}
+             onPress={async () => this.pickImage()}>
+            <Text>Upload Avatar</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.label}>Name:</Text>
+        <TextInput
+          style={styles.input}
+          autoCapitalize="words"
+          autoCompleteType="name"
+          autoCorrect={false}
+          autoFocus={true}
+          onChangeText={(name) => this.setState({ name })}
+          placeholder="Johnny Appleseed"
+          textContentType="name"
+        />
+        <Text style={styles.label}>Email address:</Text>
+        <TextInput
+          style={styles.input}
+          autoCapitalize="none"
+          autoCorrect={false}
+          autoCompleteType="email"
+          onChangeText={(emailAddress) => this.setState({ emailAddress })}
+          placeholder="johnny@apple.com"
+          textContentType="emailAddress"
+        />
+        <Text style={styles.label}>Password:</Text>
+        <TextInput
+          style={styles.input}
+          autoCorrect={false}
+          autoCompleteType="password"
+          onChangeText={(password) => this.setState({ password })}
+          placeholder="open sesame"
+          secureTextEntry={true}
+          textContentType="newPassword"
+        />
+        <TouchableOpacity style={styles.button} onPress={() => console.log(this.state)}>
+          <Text>Register</Text>
         </TouchableOpacity>
-      </View>
-      <Text style={styles.label}>Name:</Text>
-      <TextInput
-        style={styles.input}
-        autoCapitalize="words"
-        autoCompleteType="name"
-        autoCorrect={false}
-        autoFocus={true}
-        onChangeText={(name) => setState({ ...state, name })}
-        placeholder="Johnny Appleseed"
-        textContentType="name"
-      />
-      <Text style={styles.label}>Email address:</Text>
-      <TextInput
-        style={styles.input}
-        autoCapitalize="none"
-        autoCorrect={false}
-        autoCompleteType="email"
-        onChangeText={(emailAddress) => setState({ ...state, emailAddress })}
-        placeholder="johnny@apple.com"
-        textContentType="emailAddress"
-      />
-      <Text style={styles.label}>Password:</Text>
-      <TextInput
-        style={styles.input}
-        autoCorrect={false}
-        autoCompleteType="password"
-        onChangeText={(password) => setState({ ...state, password })}
-        placeholder="open sesame"
-        secureTextEntry={true}
-        textContentType="newPassword"
-      />
-      <TouchableOpacity style={styles.button} onPress={() => onRegister(state)}>
-        <Text>Register</Text>
-      </TouchableOpacity>
-    </React.Fragment>
-  );
+      </React.Fragment>
+    );
+  }
 };
 
 export default RegistrationForm;
