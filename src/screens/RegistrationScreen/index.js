@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, ScrollView, Text, View } from "react-native";
 import { useMutation } from "@apollo/react-hooks";
 
 import PlayerContext from "../../context/PlayerContext";
@@ -31,12 +31,14 @@ const RegistrationScreen = ({ navigation }) => {
   });
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Player Registration</Text>
-      <RegistrationForm
-        onRegister={(registration) => registerPlayer({ variables: registration })}
-      />
-    </View>
+    <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+      <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={20}>
+        <Text style={styles.header}>Player Registration</Text>
+        <RegistrationForm
+          onRegister={(registration) => registerPlayer({ variables: registration })}
+        />
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
