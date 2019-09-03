@@ -28,11 +28,11 @@ const ArenaCard = ({ arena, navigation }) => {
 
   return (
     <ArenaContext.Consumer>
-      {({ arenaId, setArenaId }) => (
+      {({ setArena }) => (
         <View style={styles.container}>
           <TouchableOpacity style={styles.button} onPress={() => {
-              setArenaId(id);
-              navigation.navigate("Match");
+              setArena(arena);
+              navigation.navigate("Registration");
             }}>
             <Text>{locationName}</Text>
             <Text>{streetAddress1}</Text>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AsyncStorage } from "react-native";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { ApolloProvider } from "@apollo/react-hooks";
 
@@ -30,13 +31,15 @@ const AppNavigationContainer = createAppContainer(Navigator);
 
 const App = () => {
   const [state, setState] = useState({
-    arenaId: null,
-    setArenaId: (arenaId) => {
-      setState({ ...state, arenaId });
+    arena: null,
+    setArena: (arena) => {
+      setState(prevState => ({ ...prevState, arena }));
     },
     player: null,
     setPlayer: (player) => {
-      setState({ ...state, player });
+      const { apiToken } = player;
+      setState(prevState => ({ ...prevState, player }));
+      AsyncStorage.setItem("apiToken", apiToken);
     },
   });
 
