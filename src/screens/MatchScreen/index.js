@@ -5,6 +5,7 @@ import { useMutation } from "@apollo/react-hooks";
 import ArenaContext from "../../context/ArenaContext";
 import PlayArenaMutation from "../../mutations/PlayArena";
 
+import CurrentArenaHeader from "../../components/CurrentArenaHeader";
 import MatchWaiting from "../../components/MatchWaiting";
 
 const styles = StyleSheet.create({
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
 
 const MatchScreen = () => {
   const [match, setMatch] = useState();
-  const { arenaId } = useContext(ArenaContext);
+  const { arena: { id: arenaId } } = useContext(ArenaContext);
   const [playArena] = useMutation(PlayArenaMutation, {
     onCompleted({ playArena: arena }) {
       console.log("ARENA FOUND:", arena);
@@ -28,6 +29,7 @@ const MatchScreen = () => {
 
   return (
     <View style={styles.container}>
+      <CurrentArenaHeader />
       { !match && <MatchWaiting /> }
     </View>
   );
