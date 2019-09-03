@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Image, StyleSheet, Text } from "react-native";
+import { Alert, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import PlayerContext from "../../context/PlayerContext";
 
@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 100,
     width: 100,
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#DDDDDD",
+    padding: 10,
+    marginTop: 10,
   },
 });
 
@@ -23,6 +29,9 @@ const Match = ({ match }) => {
       <Text>You have a new match!</Text>
       <Image style={styles.avatar} resizeMode="cover" source={{ uri: avatar }} />
       <Text>Against: {seeker.name}</Text>
+      <TouchableOpacity style={styles.button} onPress={() => Alert.alert(`Capture ${seeker.name}!`)}>
+        <Text>Capture!</Text>
+      </TouchableOpacity>
     </React.Fragment>
   );
 };
