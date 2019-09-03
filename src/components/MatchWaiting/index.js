@@ -10,10 +10,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const MatchWaiting = () => (
+const MatchWaiting = ({ onCheckNewMatch }) => (
   <React.Fragment>
     <Text>Waiting on a match...</Text>
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={() => onCheckNewMatch()}>
       <Text>Check for a New Match</Text>
     </TouchableOpacity>
   </React.Fragment>

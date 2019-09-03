@@ -8,7 +8,7 @@ import MatchesQuery from "../../queries/Matches";
 
 import CurrentArenaHeader from "../../components/CurrentArenaHeader";
 import Match from "../../components/Match";
-import MatchWaiting from "../../components/MatchWaiting";
+import MatchWaiting from "../../containers/MatchWaiting";
 
 const styles = StyleSheet.create({
   container: {
@@ -23,20 +23,28 @@ const MatchScreen = () => {
   const [match, setMatch] = useState();
   const { arena: { id: arenaId } } = useContext(ArenaContext);
   const client = useApolloClient();
+
   const [playArena] = useMutation(PlayArenaMutation, {
     onCompleted({ playArena: arena }) {
       const { arena: { id: arenaId }} = arena;
       client
-        .query({ query: MatchesQuery, variables: { arenaId: parseInt(arenaId) } })
-        .then(({ data: { matches } }) => setMatch(matches[0]));
+        .query({ query: MatchesQuery,
+                 variables: { arenaId: parseInt(arenaId) } })
+        .then(({ data: { matches } }) => {
+          if (matches[0]) { setMatch(matches[0]); }
+        });
     },
   });
+
   playArena({ variables: { arenaId: parseInt(arenaId) } });
 
   return (
     <View style={styles.container}>
       <CurrentArenaHeader />
-      { !match && <MatchWaiting /> }
+      { !match && <MatchWaiting
+                    arenaId={parseInt(arenaId)}
+                    onMatchFound={(match) => setMatch(match)}
+                  /> }
       { match && <Match match={match} /> }
     </View>
   );
