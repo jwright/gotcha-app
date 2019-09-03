@@ -12,6 +12,7 @@
     "@apollo/react-hooks": "^3.0.1",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
+    "apollo-link-context": "^1.0.18",
     "apollo-link-http": "^1.5.15",
     "apollo-link-schema": "^1.2.3",
     "expo": "^34.0.1",

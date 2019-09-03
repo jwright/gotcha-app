@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AsyncStorage } from "react-native";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { ApolloProvider } from "@apollo/react-hooks";
 
@@ -36,7 +37,9 @@ const App = () => {
     },
     player: null,
     setPlayer: (player) => {
+      const { apiToken } = player;
       setState(prevState => ({ ...prevState, player }));
+      AsyncStorage.setItem("apiToken", apiToken);
     },
   });
 
