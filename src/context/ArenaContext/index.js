@@ -1,8 +1,8 @@
 import { createContext } from "react";
 
 const ArenaContext = createContext({
-  arenaId: null,
-  setArenaId: (arenaId) => {},
+  arena: null,
+  setArena: (arena) => {},
 });
 
 export default ArenaContext;

@@ -31,9 +31,9 @@ const AppNavigationContainer = createAppContainer(Navigator);
 
 const App = () => {
   const [state, setState] = useState({
-    arenaId: null,
-    setArenaId: (arenaId) => {
-      setState(prevState => ({ ...prevState, arenaId }));
+    arena: null,
+    setArena: (arena) => {
+      setState(prevState => ({ ...prevState, arena }));
     },
     player: null,
     setPlayer: (player) => {
