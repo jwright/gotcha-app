@@ -32,7 +32,7 @@ const ArenaCard = ({ arena, navigation }) => {
         <View style={styles.container}>
           <TouchableOpacity style={styles.button} onPress={() => {
               setArenaId(id);
-              navigation.navigate("Match");
+              navigation.navigate("Registration");
             }}>
             <Text>{locationName}</Text>
             <Text>{streetAddress1}</Text>
