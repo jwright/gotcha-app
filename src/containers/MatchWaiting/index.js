@@ -7,8 +7,8 @@ import MatchWaitingComponent from "../../components/MatchWaiting";
 
 const MatchWaiting = ({ arenaId, onMatchFound }) => {
   const [getMatches] = useLazyQuery(MatchesQuery, {
-    variables: { arenaId },
     fetchPolicy: "network-only",
+    variables: { arenaId },
     onCompleted({ matches }) {
       const match = matches[0];
       if (match) { onMatchFound(match); }
@@ -16,9 +16,7 @@ const MatchWaiting = ({ arenaId, onMatchFound }) => {
   });
 
   return (
-    <MatchWaitingComponent
-      onCheckNewMatch={() => getMatches()}
-    />
+    <MatchWaitingComponent onCheckNewMatch={getMatches} />
   );
 };
 
