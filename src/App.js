@@ -32,11 +32,11 @@ const App = () => {
   const [state, setState] = useState({
     arenaId: null,
     setArenaId: (arenaId) => {
-      setState({ ...state, arenaId });
+      setState(prevState => ({ ...prevState, arenaId }));
     },
     player: null,
     setPlayer: (player) => {
-      setState({ ...state, player });
+      setState(prevState => ({ ...prevState, player }));
     },
   });
 
