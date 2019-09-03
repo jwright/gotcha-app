@@ -1,12 +1,11 @@
-import React, { useContext, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { useMutation } from "@apollo/react-hooks";
+import React, { useContext } from "react";
+import { StyleSheet, View } from "react-native";
+import { useApolloClient } from "@apollo/react-hooks";
 
 import ArenaContext from "../../context/ArenaContext";
-import PlayArenaMutation from "../../mutations/PlayArena";
 
 import CurrentArenaHeader from "../../components/CurrentArenaHeader";
-import MatchWaiting from "../../components/MatchWaiting";
+import Match from "../../containers/Match";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,19 +17,13 @@ const styles = StyleSheet.create({
 });
 
 const MatchScreen = () => {
-  const [match, setMatch] = useState();
   const { arena: { id: arenaId } } = useContext(ArenaContext);
-  const [playArena] = useMutation(PlayArenaMutation, {
-    onCompleted({ playArena: arena }) {
-      console.log("ARENA FOUND:", arena);
-    },
-  });
-  playArena({ variables: { arenaId: parseInt(arenaId) } });
+  const client = useApolloClient();
 
   return (
     <View style={styles.container}>
       <CurrentArenaHeader />
-      { !match && <MatchWaiting /> }
+      <Match arenaId={parseInt(arenaId)} client={client} />
     </View>
   );
 };
