@@ -1,17 +1,10 @@
 import React from "react";
-import { Alert, Button, Linking, StyleSheet, Text, View } from "react-native";
+import { Alert, Button, Linking, Text } from "react-native";
 
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+import Container from "../../components/Container";
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -63,12 +56,12 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Container>
         <Text>Welcome to Gotcha.</Text>
         <Text>We will get you playing in a moment.</Text>
         <Text>In order to get the arenas you can play in, we need to ask for your location first so you can find one nearby.</Text>
         <Button onPress={this.handleGrantPermissions} title="Find Nearby Arenas" />
-      </View>
+      </Container>
     );
   };
 }

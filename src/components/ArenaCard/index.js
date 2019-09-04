@@ -1,19 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import ArenaContext from "../../context/ArenaContext";
+
+import Container from "../../components/Container";
 
 const styles = StyleSheet.create({
   button: {
     alignItems: "center",
     backgroundColor: "#DDDDDD",
     padding: 10
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "stretch",
-    justifyContent: "center"
   },
 });
 
@@ -29,7 +25,7 @@ const ArenaCard = ({ arena, navigation }) => {
   return (
     <ArenaContext.Consumer>
       {({ setArena }) => (
-        <View style={styles.container}>
+        <Container stretched>
           <TouchableOpacity style={styles.button} onPress={() => {
               setArena(arena);
               navigation.navigate("Registration");
@@ -39,7 +35,7 @@ const ArenaCard = ({ arena, navigation }) => {
             {streetAddress2 && <Text>{streetAddress2}</Text>}
             <Text>{city}, {state} {zipCode}</Text>
           </TouchableOpacity>
-        </View>
+        </Container>
       )}
     </ArenaContext.Consumer>
   );
