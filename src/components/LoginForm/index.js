@@ -1,17 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
 
 import Button, { ButtonText } from "../../components/Button";
 import Label from "../../components/Label";
-
-const styles = StyleSheet.create({
-  input: {
-    borderColor: "#000",
-    borderWidth: 2,
-    padding: 10,
-    margin: 5,
-  },
-});
+import TextInput from "../../components/TextInput";
 
 const LoginForm = ({ onLogin }) => {
   const [state, setState] = useState({
@@ -23,7 +14,6 @@ const LoginForm = ({ onLogin }) => {
     <React.Fragment>
       <Label text="Email address:" />
       <TextInput
-        style={styles.input}
         autoCapitalize="none"
         autoCorrect={false}
         autoCompleteType="email"
@@ -34,7 +24,6 @@ const LoginForm = ({ onLogin }) => {
       />
       <Label text="Password:" />
       <TextInput
-        style={styles.input}
         autoCorrect={false}
         autoCompleteType="password"
         onChangeText={(password) => setState({ ...state, password })}

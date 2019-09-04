@@ -1,10 +1,11 @@
 import React from "react";
-import { Alert, Image, Linking, StyleSheet, TextInput, View } from "react-native";
+import { Alert, Image, Linking, StyleSheet, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 
 import Button, { ButtonText } from "../../components/Button";
 import Label from "../../components/Label";
+import TextInput from "../../components/TextInput";
 
 const styles = StyleSheet.create({
   avatar: {
@@ -24,12 +25,6 @@ const styles = StyleSheet.create({
   avatarContainer: {
     alignSelf: "center",
     marginTop: 10,
-  },
-  input: {
-    borderColor: "#000",
-    borderWidth: 2,
-    padding: 10,
-    margin: 5,
   },
 });
 
@@ -79,7 +74,6 @@ class RegistrationForm extends React.Component {
         </View>
         <Label text="Name:" />
         <TextInput
-          style={styles.input}
           autoCapitalize="words"
           autoCompleteType="name"
           autoCorrect={false}
@@ -90,7 +84,6 @@ class RegistrationForm extends React.Component {
         />
         <Label text="Email address:" />
         <TextInput
-          style={styles.input}
           autoCapitalize="none"
           autoCorrect={false}
           autoCompleteType="email"
@@ -100,7 +93,6 @@ class RegistrationForm extends React.Component {
         />
         <Label text="Password:" />
         <TextInput
-          style={styles.input}
           autoCorrect={false}
           autoCompleteType="password"
           onChangeText={(password) => this.setState({ password })}
