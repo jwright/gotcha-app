@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export const ButtonText = ({ text }) => (
-  <Text style={styles.text}>{text}</Text>
+export const ButtonText = ({ style, text }) => (
+  <Text style={[styles.text, style]}>{text}</Text>
 );
 
 const Button = ({ children, onPress, style }) => (
