@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
-import { Alert, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Alert, Image, StyleSheet, Text } from "react-native";
 
 import PlayerContext from "../../context/PlayerContext";
+
+import Button, { ButtonText } from "../../components/Button";
+import Header2 from "../../components/Header2";
 
 const styles = StyleSheet.create({
   avatar: {
@@ -10,12 +13,12 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
   },
-  button: {
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 10,
-    marginTop: 10,
-  },
+  name: {
+    color: "#F25EAC",
+    fontSize: 20,
+    paddingBottom: 10,
+    paddingTop: 10,
+  }
 });
 
 const Match = ({ match }) => {
@@ -26,12 +29,12 @@ const Match = ({ match }) => {
 
   return (
     <React.Fragment>
-      <Text>You have a new match!</Text>
+      <Header2 style={{ marginBottom: 24 }} text="You have a new match!" />
       <Image style={styles.avatar} resizeMode="cover" source={{ uri: avatar }} />
-      <Text>Against: {seeker.name}</Text>
-      <TouchableOpacity style={styles.button} onPress={() => Alert.alert(`Capture ${seeker.name}!`)}>
-        <Text>Capture!</Text>
-      </TouchableOpacity>
+      <Text style={styles.name}>{seeker.name}</Text>
+      <Button onPress={() => Alert.alert(`Capture ${seeker.name}!`)}>
+        <ButtonText text="Capture!" />
+      </Button>
     </React.Fragment>
   );
 };

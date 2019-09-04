@@ -5,6 +5,7 @@ import ArenaContext from "../../context/ArenaContext";
 
 import Container from "../../components/Container";
 import CurrentArenaHeader from "../../components/CurrentArenaHeader";
+import Header from "../../components/Header";
 import Match from "../../containers/Match";
 
 const MatchScreen = () => {
@@ -13,6 +14,7 @@ const MatchScreen = () => {
 
   return (
     <Container>
+      <Header style={{ marginTop: 100 }} text="Current Match" />
       <CurrentArenaHeader />
       <Match arenaId={parseInt(arenaId)} client={client} />
     </Container>

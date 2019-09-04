@@ -1,21 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const styles = StyleSheet.create({
-  button: {
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 10,
-    marginTop: 10,
-  },
-});
+import Button, { ButtonText } from "../../components/Button";
+import Header2 from "../../components/Header2";
 
 const MatchWaiting = ({ onCheckNewMatch }) => (
   <React.Fragment>
-    <Text>Waiting on a match...</Text>
-    <TouchableOpacity style={styles.button} onPress={() => onCheckNewMatch()}>
-      <Text>Check for a New Match</Text>
-    </TouchableOpacity>
+    <Header2 text="Waiting on a match..." />
+    <Button onPress={() => onCheckNewMatch()}>
+      <ButtonText text="Check for a New Match" />
+    </Button>
   </React.Fragment>
 );
 
