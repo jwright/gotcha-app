@@ -1,19 +1,25 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 import ArenaContext from "../../context/ArenaContext";
 
+import Button from "../../components/Button";
+import Container from "../../components/Container";
+
 const styles = StyleSheet.create({
-  button: {
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 10
+  address: {
+    fontSize: 12,
   },
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "stretch",
-    justifyContent: "center"
+  button: {
+    borderLeftColor: "#F25EAC",
+    borderLeftWidth: 3,
+  },
+  buttonText: {
+    color: "#fff",
+  },
+  name: {
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });
 
@@ -29,17 +35,17 @@ const ArenaCard = ({ arena, navigation }) => {
   return (
     <ArenaContext.Consumer>
       {({ setArena }) => (
-        <View style={styles.container}>
-          <TouchableOpacity style={styles.button} onPress={() => {
+        <Container stretched>
+          <Button style={styles.button} onPress={() => {
               setArena(arena);
               navigation.navigate("Registration");
             }}>
-            <Text>{locationName}</Text>
-            <Text>{streetAddress1}</Text>
-            {streetAddress2 && <Text>{streetAddress2}</Text>}
-            <Text>{city}, {state} {zipCode}</Text>
-          </TouchableOpacity>
-        </View>
+            <Text style={[styles.buttonText, styles.name]}>{locationName}</Text>
+            <Text style={[styles.buttonText, styles.address]}>{streetAddress1}</Text>
+            {streetAddress2 && <Text style={[styles.buttonText, styles.address]}>{streetAddress2}</Text>}
+            <Text style={[styles.buttonText, styles.address]}>{city}, {state} {zipCode}</Text>
+          </Button>
+        </Container>
       )}
     </ArenaContext.Consumer>
   );

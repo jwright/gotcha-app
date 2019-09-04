@@ -1,15 +1,25 @@
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Alert, Linking, StyleSheet, Text } from "react-native";
 
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 
+import Button, { ButtonText } from "../../components/Button";
+import Container from "../../components/Container";
+import Logo from "../../components/Logo";
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+  h4: {
+    fontSize: 16,
+    paddingBottom: 24,
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+  instructions: {
+    fontSize: 12,
+    paddingBottom: 24,
+    paddingLeft: 8,
+    paddingRight: 8,
   },
 });
 
@@ -24,12 +34,25 @@ class HomeScreen extends React.Component {
     return { latitude, longitude };
   };
 
-  handleGrantPermissions = async () => {
+  static async askLocationPermissions() {
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
+    return status === "granted";
+  }
 
-    if (status !== "granted") {
-      // TODO: Display an error
-      console.log("You must enable location services so we can retrieve the list of Arenas");
+  static async hasLocationPermissions() {
+    const { status } = await Permissions.getAsync(Permissions.LOCATION);
+    return status === "granted";
+  }
+
+  handleGrantPermissions = async () => {
+    const permissions = await HomeScreen.askLocationPermissions();
+
+    if (await !permissions) {
+      Alert.alert("Location Unknown",
+                  "You must enable location services so a list of nearby Arenas can be found.", [
+                  { text: "OK", onPress: () => Linking.openURL("app-settings:") },
+      ]);
+      return;
     }
 
     this.navigate();
@@ -43,19 +66,23 @@ class HomeScreen extends React.Component {
   };
 
   async componentDidMount() {
-    if (await Location.hasServicesEnabledAsync()) {
+    if (await HomeScreen.hasLocationPermissions() && await Location.hasServicesEnabledAsync()) {
       this.navigate();
     }
   };
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Welcome to Gotcha.</Text>
-        <Text>We will get you playing in a moment.</Text>
-        <Text>In order to get the arenas you can play in, we need to ask for your location first so you can find one nearby.</Text>
-        <Button onPress={this.handleGrantPermissions} title="Find Nearby Arenas" />
-      </View>
+      <Container>
+        <Logo style={{ paddingBottom: 100 }} />
+        <Text style={styles.h4}>We will get you playing Gotcha! in a moment.</Text>
+        <Text style={styles.instructions}>
+          In order to get the arenas you can play in, we need to ask for your location first so you can find one nearby.
+        </Text>
+        <Button onPress={this.handleGrantPermissions}>
+          <ButtonText text="Find Nearby Arenas" />
+        </Button>
+      </Container>
     );
   };
 }

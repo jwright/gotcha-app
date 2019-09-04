@@ -1,24 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-const styles = StyleSheet.create({
-  button: {
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 10,
-    marginTop: 10,
-  },
-  input: {
-    borderColor: "#000",
-    borderWidth: 2,
-    padding: 10,
-    margin: 5,
-  },
-  label: {
-    marginLeft: 5,
-    marginTop: 10,
-  }
-});
+import Button, { ButtonText } from "../../components/Button";
+import Label from "../../components/Label";
+import TextInput from "../../components/TextInput";
 
 const LoginForm = ({ onLogin }) => {
   const [state, setState] = useState({
@@ -28,9 +12,8 @@ const LoginForm = ({ onLogin }) => {
 
   return (
     <React.Fragment>
-      <Text style={styles.label}>Email address:</Text>
+      <Label text="Email address:" />
       <TextInput
-        style={styles.input}
         autoCapitalize="none"
         autoCorrect={false}
         autoCompleteType="email"
@@ -39,9 +22,8 @@ const LoginForm = ({ onLogin }) => {
         placeholder="johnny@apple.com"
         textContentType="emailAddress"
       />
-      <Text style={styles.label}>Password:</Text>
+      <Label text="Password:" />
       <TextInput
-        style={styles.input}
         autoCorrect={false}
         autoCompleteType="password"
         onChangeText={(password) => setState({ ...state, password })}
@@ -49,9 +31,9 @@ const LoginForm = ({ onLogin }) => {
         secureTextEntry={true}
         textContentType="newPassword"
       />
-      <TouchableOpacity style={styles.button} onPress={() => onLogin(state)}>
-        <Text>Login</Text>
-      </TouchableOpacity>
+      <Button onPress={() => onLogin(state)}>
+        <ButtonText text="Login" />
+      </Button>
     </React.Fragment>
   );
 };

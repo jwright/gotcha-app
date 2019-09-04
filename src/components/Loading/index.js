@@ -1,19 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text } from "react-native";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+import Container from "../../components/Container";
 
 const Loading = () => (
-  <View style={styles.container}>
+  <Container stretched>
     <Text>Loading...</Text>
-  </View>
+  </Container>
 );
 
 export default Loading;

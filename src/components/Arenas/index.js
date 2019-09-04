@@ -1,13 +1,16 @@
 import React from "react";
 
-import ArenaCard from "../ArenaCard";
+import ArenaCard from "../../components/ArenaCard";
+import Container from "../../components/Container";
+import Header from "../../components/Header";
 
 const Arenas = ({ arenas, navigation }) => (
-  <React.Fragment>
+  <Container stretched>
+    <Header style={{ marginTop: 100 }} text="Available Arenas" />
     {arenas.map((arena) => (
       <ArenaCard key={arena.id} arena={arena} navigation={navigation} />
     ))}
-  </React.Fragment>
+  </Container>
 );
 
 export default Arenas;

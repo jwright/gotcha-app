@@ -1,7 +1,11 @@
 import React from "react";
-import { Alert, Image, Linking, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, Image, Linking, StyleSheet, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
+
+import Button, { ButtonText } from "../../components/Button";
+import Label from "../../components/Label";
+import TextInput from "../../components/TextInput";
 
 const styles = StyleSheet.create({
   avatar: {
@@ -10,26 +14,18 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
   },
+  avatarButton: {
+    alignSelf: "auto",
+    backgroundColor: "#ddd",
+  },
+  avatarButtonText: {
+    color: "#000",
+    fontWeight: "normal",
+  },
   avatarContainer: {
     alignSelf: "center",
     marginTop: 10,
   },
-  button: {
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 10,
-    marginTop: 10,
-  },
-  input: {
-    borderColor: "#000",
-    borderWidth: 2,
-    padding: 10,
-    margin: 5,
-  },
-  label: {
-    marginLeft: 5,
-    marginTop: 10,
-  }
 });
 
 class RegistrationForm extends React.Component {
@@ -70,15 +66,14 @@ class RegistrationForm extends React.Component {
       <React.Fragment>
         <View style={styles.avatarContainer}>
           <Image style={styles.avatar} resizeMode="cover" source={{ uri: avatar }} />
-          <TouchableOpacity
-             style={styles.button}
+          <Button
+             style={styles.avatarButton}
              onPress={async () => this.pickImage()}>
-            <Text>Upload Avatar</Text>
-          </TouchableOpacity>
+            <ButtonText style={styles.avatarButtonText} text="Upload Avatar" />
+          </Button>
         </View>
-        <Text style={styles.label}>Name:</Text>
+        <Label text="Name:" />
         <TextInput
-          style={styles.input}
           autoCapitalize="words"
           autoCompleteType="name"
           autoCorrect={false}
@@ -87,9 +82,8 @@ class RegistrationForm extends React.Component {
           placeholder="Johnny Appleseed"
           textContentType="name"
         />
-        <Text style={styles.label}>Email address:</Text>
+        <Label text="Email address:" />
         <TextInput
-          style={styles.input}
           autoCapitalize="none"
           autoCorrect={false}
           autoCompleteType="email"
@@ -97,9 +91,8 @@ class RegistrationForm extends React.Component {
           placeholder="johnny@apple.com"
           textContentType="emailAddress"
         />
-        <Text style={styles.label}>Password:</Text>
+        <Label text="Password:" />
         <TextInput
-          style={styles.input}
           autoCorrect={false}
           autoCompleteType="password"
           onChangeText={(password) => this.setState({ password })}
@@ -107,9 +100,9 @@ class RegistrationForm extends React.Component {
           secureTextEntry={true}
           textContentType="newPassword"
         />
-        <TouchableOpacity style={styles.button} onPress={() => onRegister(this.state)}>
-          <Text>Register</Text>
-        </TouchableOpacity>
+        <Button onPress={() => onRegister(this.state)}>
+          <ButtonText text="Register" />
+        </Button>
       </React.Fragment>
     );
   }

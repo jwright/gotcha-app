@@ -1,22 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
+
+import Container from "../../components/Container";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   message: {
     color: "#ff0000",
   },
 });
 
 const ErrorMessage = ({ error, message }) => (
-  <View style={styles.container}>
+  <Container stretched>
     <Text style={styles.message}>{message}{` (${error})`}</Text>
-  </View>
+  </Container>
 );
 
 export default ErrorMessage;
