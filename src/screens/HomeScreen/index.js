@@ -43,7 +43,9 @@ class HomeScreen extends React.Component {
   };
 
   async componentDidMount() {
-    if (await Location.hasServicesEnabledAsync()) {
+    const { status } = await Permissions.getAsync(Permissions.LOCATION);
+
+    if (status === "granted" && await Location.hasServicesEnabledAsync()) {
       this.navigate();
     }
   };
