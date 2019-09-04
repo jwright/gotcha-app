@@ -5,14 +5,11 @@ import { useMutation } from "@apollo/react-hooks";
 import LoginMutation from "../../mutations/Login";
 import PlayerContext from "../../context/PlayerContext";
 
+import Header from "../../components/Header";
 import LoginForm from "../../components/LoginForm";
 import ScrollContainer from "../../components/ScrollContainer";
 
 const styles = StyleSheet.create({
-  header: {
-    alignSelf: "center",
-    fontSize: 40,
-  },
   linkButton: {
     color: "#007AFF",
     fontSize: 14,
@@ -33,7 +30,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <ScrollContainer keyboardShouldPersistTaps="handled">
       <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={20}>
-        <Text style={styles.header}>Login</Text>
+        <Header text="Login" />
         <LoginForm onLogin={(auth) => login({ variables: auth})} />
         <TouchableOpacity onPress={() => navigation.navigate("Registration")}>
           <Text style={styles.linkButton}>Don&apos;t have an account?</Text>

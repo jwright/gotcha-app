@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 });
 
 const ErrorMessage = ({ error, message }) => (
-  <Container>
+  <Container stretched>
     <Text style={styles.message}>{message}{` (${error})`}</Text>
   </Container>
 );

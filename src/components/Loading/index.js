@@ -4,7 +4,7 @@ import { Text } from "react-native";
 import Container from "../../components/Container";
 
 const Loading = () => (
-  <Container>
+  <Container stretched>
     <Text>Loading...</Text>
   </Container>
 );

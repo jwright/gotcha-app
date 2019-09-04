@@ -5,14 +5,11 @@ import { useMutation } from "@apollo/react-hooks";
 import PlayerContext from "../../context/PlayerContext";
 import RegisterPlayerMutation from "../../mutations/RegisterPlayer";
 
+import Header from "../../components/Header";
 import RegistrationForm from "../../components/RegistrationForm";
 import ScrollContainer from "../../components/ScrollContainer";
 
 const styles = StyleSheet.create({
-  header: {
-    alignSelf: "center",
-    fontSize: 40,
-  },
   linkButton: {
     color: "#007AFF",
     fontSize: 14,
@@ -33,7 +30,7 @@ const RegistrationScreen = ({ navigation }) => {
   return (
     <ScrollContainer keyboardShouldPersistTaps="handled">
       <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={20}>
-        <Text style={styles.header}>Player Registration</Text>
+        <Header text="Player Registration" />
         <RegistrationForm
           onRegister={(registration) => registerPlayer({ variables: registration })}
         />
