@@ -40,10 +40,6 @@ There is a JavaScript script that will start Expo, run the server, and allow you
 yarn start
 ```
 
-### Running Tests
-
-## DEPLOYING
-
 ## CONTRIBUTING
 
 1. Fork the repository `hub fork https://github.com/jwright/gotcha-app.git`
