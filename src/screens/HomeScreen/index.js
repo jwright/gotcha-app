@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Button, StyleSheet, Text, View } from "react-native";
+import { Alert, Button, Linking, StyleSheet, Text, View } from "react-native";
 
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -24,11 +24,24 @@ class HomeScreen extends React.Component {
     return { latitude, longitude };
   };
 
-  handleGrantPermissions = async () => {
+  static async askLocationPermissions() {
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
+    return status === "granted";
+  }
 
-    if (status !== "granted") {
-      Alert.alert("Location Unknown", "You must enable location services so a list of nearby Arenas can be found.");
+  static async hasLocationPermissions() {
+    const { status } = await Permissions.getAsync(Permissions.LOCATION);
+    return status === "granted";
+  }
+
+  handleGrantPermissions = async () => {
+    const permissions = await HomeScreen.askLocationPermissions();
+
+    if (await !permissions) {
+      Alert.alert("Location Unknown",
+                  "You must enable location services so a list of nearby Arenas can be found.", [
+                  { text: "OK", onPress: () => Linking.openURL("app-settings:") },
+      ]);
       return;
     }
 
@@ -43,9 +56,7 @@ class HomeScreen extends React.Component {
   };
 
   async componentDidMount() {
-    const { status } = await Permissions.getAsync(Permissions.LOCATION);
-
-    if (status === "granted" && await Location.hasServicesEnabledAsync()) {
+    if (await HomeScreen.hasLocationPermissions() && await Location.hasServicesEnabledAsync()) {
       this.navigate();
     }
   };
