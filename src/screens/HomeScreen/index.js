@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Alert, Button, StyleSheet, Text, View } from "react-native";
 
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -28,8 +28,8 @@ class HomeScreen extends React.Component {
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
 
     if (status !== "granted") {
-      // TODO: Display an error
-      console.log("You must enable location services so we can retrieve the list of Arenas");
+      Alert.alert("Location Unknown", "You must enable location services so a list of nearby Arenas can be found.");
+      return;
     }
 
     this.navigate();
