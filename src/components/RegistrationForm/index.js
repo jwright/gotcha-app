@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert, Image, Linking, StyleSheet, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions";
+import { Camera } from "expo-camera";
 
 import Button, { ButtonText } from "../../components/Button";
 import Label from "../../components/Label";
@@ -37,7 +37,7 @@ class RegistrationForm extends React.Component {
   };
 
   pickImage = async () => {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    const { status } = await Camera.requestPermissionsAsync();
 
     if (status === "granted") {
       const camera = await ImagePicker.launchImageLibraryAsync({
