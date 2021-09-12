@@ -2,7 +2,6 @@ import React from "react";
 import { Alert, Linking, StyleSheet, Text } from "react-native";
 
 import * as Location from "expo-location";
-import * as Permissions from "expo-permissions";
 
 import Button, { ButtonText } from "../../components/Button";
 import Container from "../../components/Container";
@@ -35,13 +34,13 @@ class HomeScreen extends React.Component {
   };
 
   static async askLocationPermissions() {
-    const { status } = await Permissions.askAsync(Permissions.LOCATION);
-    return status === "granted";
+    const { granted } = await Location.requestPermissionsAsync();
+    return granted;
   }
 
   static async hasLocationPermissions() {
-    const { status } = await Permissions.getAsync(Permissions.LOCATION);
-    return status === "granted";
+    const { granted } = await Location.getPermissionsAsync();
+    return granted;
   }
 
   handleGrantPermissions = async () => {
