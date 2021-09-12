@@ -34,12 +34,12 @@ class HomeScreen extends React.Component {
   };
 
   static async askLocationPermissions() {
-    const { granted } = await Location.requestPermissionsAsync();
+    const { granted } = await Location.requestForegroundPermissionsAsync();
     return granted;
   }
 
   static async hasLocationPermissions() {
-    const { granted } = await Location.getPermissionsAsync();
+    const { granted } = await Location.getForegroundPermissionsAsync();
     return granted;
   }
 
