@@ -15,20 +15,21 @@
     "apollo-link-context": "^1.0.18",
     "apollo-link-http": "^1.5.15",
     "apollo-link-schema": "^1.2.3",
-    "expo": "^38.0.0",
-    "expo-camera": "~8.3.1",
-    "expo-image-picker": "~8.3.0",
-    "expo-location": "~8.2.1",
+    "expo": "^40.0.0",
+    "expo-camera": "~9.1.0",
+    "expo-image-picker": "~9.2.0",
+    "expo-location": "~10.0.0",
     "graphql": "^14.4.2",
     "graphql-tag": "^2.10.1",
-    "react": "16.11.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
-    "react-native-gesture-handler": "~1.6.0",
-    "react-native-reanimated": "~1.9.0",
-    "react-navigation": "^3.11.1"
+    "react": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native-gesture-handler": "~1.8.0",
+    "react-native-reanimated": "~1.13.0",
+    "react-native-screens": "~2.15.2",
+    "react-navigation": "^3.13.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^8.2.3",
+    "babel-preset-expo": "8.3.0",
     "graphql-tools": "^4.0.5"
   }
 }
