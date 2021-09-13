@@ -32,8 +32,4 @@ const RegistrationScreen = ({ navigation }) => {
   );
 };
 
-RegistrationScreen.navigationOptions = {
-  title: "Register"
-};
-
 export default RegistrationScreen;

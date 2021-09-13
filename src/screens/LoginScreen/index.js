@@ -30,8 +30,4 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
-LoginScreen.navigationOptions = {
-  title: "Login"
-};
-
 export default LoginScreen;

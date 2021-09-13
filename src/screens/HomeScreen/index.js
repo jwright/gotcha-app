@@ -23,10 +23,6 @@ const styles = StyleSheet.create({
 });
 
 class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: "Gotcha!",
-  };
-
   static async getLocation() {
     const { coords: { latitude, longitude } } = await Location.getCurrentPositionAsync({});
 

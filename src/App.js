@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AsyncStorage } from "react-native";
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ApolloProvider } from "@apollo/react-hooks";
 
 import client from "./helpers/client";
@@ -14,20 +15,7 @@ import LoginScreen from "./screens/LoginScreen";
 import MatchScreen from "./screens/MatchScreen";
 import RegistrationScreen from "./screens/RegistrationScreen";
 
-const Navigator = createSwitchNavigator(
-  {
-    ArenaList: { screen: ArenaListScreen },
-    Home: { screen: HomeScreen },
-    Login: { screen: LoginScreen },
-    Match: { screen: MatchScreen },
-    Registration: { screen: RegistrationScreen },
-  },
-  {
-    initialRouteName: "Home",
-  },
-);
-
-const AppNavigationContainer = createAppContainer(Navigator);
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   const [state, setState] = useState({
@@ -47,7 +35,15 @@ const App = () => {
     <ApolloProvider client={client}>
       <ArenaContext.Provider value={state}>
         <PlayerContext.Provider value={state}>
-          <AppNavigationContainer />
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Home">
+              <Stack.Screen name="ArenaList" component={ArenaListScreen} options={{ headerBackVisible: false, title: "Select An Arena" }} />
+              <Stack.Screen name="Home" component={HomeScreen} options={{ headerBackVisible: false, title: "Gotcha!" }} />
+              <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false, title: "Login" }} />
+              <Stack.Screen name="Match" component={MatchScreen} options={{ headerShown: false }} />
+              <Stack.Screen name="Registration" component={RegistrationScreen} options={{ headerShown: false, title: "Register" }} />
+            </Stack.Navigator>
+          </NavigationContainer>
         </PlayerContext.Provider>
       </ArenaContext.Provider>
     </ApolloProvider>
